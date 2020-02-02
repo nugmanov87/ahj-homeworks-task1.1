@@ -1,29 +1,25 @@
 {
     "env": {
-      "browser": true,
-      "es6": true,
-      "jest": true
+        "browser": true,
+        "es6": true,
+        "jest": true
     },
     "extends": [
-      "airbnb-base"
+        "airbnb-base"
     ],
     "globals": {
-      "Atomics": "readonly",
-      "SharedArrayBuffer": "readonly"
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
-      "ecmaVersion": 2018,
-      "sourceType": "module"
+        "ecmaVersion": 2018,
+        "sourceType": "module"
     },
     "rules": {
-      "no-restricted-syntax": [
-        "error",
-        "LabeledStatement",
-        "WithStatement"
-      ],
-      "import/extensions": [
-        "error",
-        "ignorePackages"
-      ]
+        "no-restricted-syntax": [
+            "error",
+            "LabeledStatement",
+            "WithStatement"
+        ]
     }
-  }
+}

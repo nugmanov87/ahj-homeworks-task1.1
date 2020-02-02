@@ -1,23 +1,12 @@
-const path = require('path'); // Node.js модуль для разрешения путей файлов
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // устанавливается через npm
+/* eslint-disable import/no-extraneous-dependencies */
+const path = require('path');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'app.bundle.js',
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-    }),
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      filename: './index.html',
-      favicon: './src/favicon.ico',
-    }),
-  ],
   module: {
     rules: [
       {
@@ -28,13 +17,6 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader, 'css-loader',
-        ],
-      },
-
-      {
         test: /\.html$/,
         use: [
           {
@@ -43,17 +25,32 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png)$/,
+        test: /\.css$/,
         use: [
-          {
-            loader: 'file-loader',
-            options: {
-              esModule: false,
-              name: '[name].[ext]',
-            },
-          },
+          MiniCssExtractPlugin.loader, 'css-loader',
         ],
+      },
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 8192,
+            esModule: false,
+          },
+        }],
       },
     ],
   },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: './src/index.html',
+      filename: './index.html',
+      favicon: 'src/favicon.ico',
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+  ],
 };
